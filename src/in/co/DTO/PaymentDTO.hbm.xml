@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 2, 2015 11:09:58 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="in.co.DTO.PaymentDTO" table="PAYMENTDTO">
+		<id name="id" type="long">
+			<column name="ID" />
+			<generator class="increment" />
+		</id>
+		<discriminator column="PAYMENT_TYPE" />
+		<property name="amount" column="AMOUNT"></property>
+		<joined-subclass name="CCPayment" table="CREDIT_PAYMENT">
+			<key column="PAYMENT_ID" />
+			<property name="ccType" column="CCTYPE" />
+		</joined-subclass>
+		<joined-subclass name="CashPayment" table="CASH_PAYMENT">
+		<key column="PAYMENT_ID"/>
+		</joined-subclass>
+		
+		<joined-subclass name="ChequePayment" table="CHEQUE_PAYMENT">
+		<key column="PAYMENT_ID"/>
+		</joined-subclass>
+	</class>
+</hibernate-mapping>
